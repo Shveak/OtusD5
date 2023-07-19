@@ -8,25 +8,29 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
 
-    IUserService iUserService;
+    IUserService userService;
 
-    public UserController(IUserService iUserService) {
-        this.iUserService = iUserService;
+    public UserController(IUserService userService) {
+        this.userService = userService;
     }
 
     @GetMapping("/all")
     public List<User> getAllUser() {
-        return iUserService.getAllUser();
+        System.out.println(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")) + " Поступил запрос -> /user/all");
+        return userService.getAllUser();
     }
 
     @GetMapping("/{id}")
     public Rating getRatingByName(@PathVariable String id) {
-        return iUserService.getRating(id);
+        System.out.println(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")) + " Поступил запрос -> /user/" + id);
+        return userService.getRating(id);
     }
 }
