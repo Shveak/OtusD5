@@ -23,7 +23,7 @@ public class ExceptionResponse {
         response.put("timestamp", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
         response.put("status", 400);
         response.put("error", "Плохой запрос");
-        response.put("message", e.getMessage());
+        response.put("message", e.getCause() == null ? e.getMessage() : e.getCause().getMessage());
 
         return response;
     }

@@ -3,6 +3,7 @@ package org.otus.service;
 import org.otus.model.Cources;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -14,6 +15,7 @@ public class CourcesService implements ICourceService {
     public Cources getCources() {
         return new Cources(mapCourses.entrySet().stream()
                 .map(x -> new Cources.Cource(x.getKey(), x.getValue()))
+                .sorted(Comparator.comparing(Cources.Cource::getName))
                 .collect(Collectors.toList()));
     }
 
